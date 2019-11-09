@@ -16,6 +16,7 @@ class CreatePhothoTable extends Migration
         Schema::create('photho', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('path', 100)->nullable()->default('this is failed');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

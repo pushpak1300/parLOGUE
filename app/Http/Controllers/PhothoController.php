@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\photho;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Yajra\Datatables\Datatables;
+
 
 class PhothoController extends Controller
 {
@@ -15,17 +17,8 @@ class PhothoController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $photho=photho::all();
+        return view('photho.index',['photho'=>$photho]);
     }
 
     /**
@@ -58,39 +51,6 @@ class PhothoController extends Controller
 return response()->json($photho);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\photho  $photho
-     * @return \Illuminate\Http\Response
-     */
-    public function show(photho $photho)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\photho  $photho
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(photho $photho)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\photho  $photho
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, photho $photho)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -100,6 +60,28 @@ return response()->json($photho);
      */
     public function destroy(photho $photho)
     {
-        //
+        $photho->delete();
+        return redirect()->back();
+    }
+     /**
+     * Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function anyData()
+    {
+        $photho=photho::select(['path','created_at','id']);
+        return Datatables::of($photho)
+            ->addColumn('thumbnail', function (photho $photho) {
+            return '<img width=60px; height=80px; src="'.$photho->path.'">';
+            })
+            ->addColumn('delete', function(photho $photho) {
+                return '<button id="'.$photho->id.'" class="delete fa fa-trash btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal"></button>';
+            })
+            ->addColumn('view', function(photho $photho) {
+                return '<button id="'.$photho->path.'" class="view fa fa-search-plus btn-sm btn-success" data-toggle="modal" data-target="#viewModal"></button>';
+            })
+            ->rawColumns(['delete','view', 'thumbnail'])
+            ->make(true);
     }
 }

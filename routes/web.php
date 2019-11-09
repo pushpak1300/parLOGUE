@@ -22,3 +22,4 @@ Route::get('/home', function() {
 })->name('home')->middleware('auth');
 
 Route::resource('photho', 'PhothoController');
+Route::get('/photho-table', 'PhothoController@anyData');

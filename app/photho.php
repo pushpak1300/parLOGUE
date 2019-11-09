@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class photho extends Model
 {
      /**
@@ -11,11 +11,12 @@ class photho extends Model
      *
      * @var array
      */
-    protected $fillable = ['path'];
+    protected $fillable = ['path','creadted_at'];
     /**
      * The table associated with the model.
      *
      * @var string
      */
     protected $table = 'photho';
+    use SoftDeletes;
 }
