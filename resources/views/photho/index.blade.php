@@ -42,7 +42,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Phothos</h3>
+              <a href="/addphotho" class="btn-primary btn">Add Photho</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -54,6 +54,7 @@
                 <th>Created At</th>
                 <th>View</th>
                 <th>Delete</th>
+                <th>Add</th>
             </tr>
         </thead>
         <tfoot>
@@ -63,6 +64,7 @@
                 <th>Created At</th>
                 <th>View</th>
                 <th>Delete</th>
+                <th>Add</th>
                 
             </tr>
         </tfoot>
@@ -124,6 +126,34 @@
         <!-- /.modal-dialog -->
       </div>
 
+      <div class="modal fade" id="addModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Add Product Modal</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Do yo Really Want To Add Product?</p>
+            </div>
+            <form action="/product/create" id="add_photho" method="GET">
+                @csrf
+                @method('GET')
+                <input type="hidden" id='product' name='id' value="" required>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="sumbit" class="btn btn-danger">Confirm</button>
+            </div>
+            </form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
+
 @endsection
 
 @push('js')
@@ -141,6 +171,7 @@
             { data: 'created_at', name: 'created_at' },
             { data: 'view', name: 'view' },
             { data: 'delete', name: 'delete' },
+            { data: 'add', name: 'add' },
         ],
         language: {paginate: {previous: "<i class='fa fa-angle-left'>", next: "<i class='fa fa-angle-right'>"}}
     });
@@ -148,6 +179,10 @@
     $('#photho').on('click', '.delete', function() {
             $id = $(this).attr('id');
             $('#delete_photho').attr('action', '/photho/' + $id);
+        });
+    $('#photho').on('click', '.add', function() {
+            $id = $(this).attr('id');
+            $('#product').attr('value',$id);
         });
     $('#photho').on('click', '.view', function() {
             $id = $(this).attr('id');

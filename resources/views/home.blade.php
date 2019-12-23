@@ -2,6 +2,8 @@
 
 @push('css')
 <link href="https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{asset('plugins/select2/css/select2.min.css')}}">
+<link rel="stylesheet" href="{{asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
 
 <style> 
     .page-heading {
@@ -27,8 +29,8 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -45,14 +47,14 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>{{App\product::count()}}</h3>
 
                 <p>Total Products</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/product" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -67,7 +69,7 @@
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/photho" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -105,6 +107,80 @@
           </div>
           <!-- /.col -->
         </div>
+        <div class="col-md-4">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Seacrh Product</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <form action='/search' method="GET" role="form">
+                                @csrf
+                                @method('GET')
+                                
+      
+
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <label>Category</label>
+                                            <select class="form-control category " id='category' name="category" aria-placeholder="Select Category">
+                                                <option></option>
+                                                <option>Girl</option>
+                                                <option>Boy</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row ">
+                                    <div class="col-sm-8">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <label>Select Sub-Category</label>
+                                            <select class="form-control sub-category" name="sub_categor" aria-placeholder="Select a subcategory">
+                                                <option></option>
+                                                
+                                                @foreach (App\sub_category::all() as $subcategorie)
+                                               <option>{{$subcategorie->sub_category}}</option>  
+                                            @endforeach
+                                            <option>All</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-8">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <label>Select Size</label>
+                                            <select class="form-control size"  name="size[]" multiple="multiple">
+                                                <option>16</option>
+                                                <option>18</option>
+                                                <option>20</option>
+                                                <option>22</option>
+                                                <option>24</option>
+                                                <option>26</option>
+                                                <option>28</option>
+                                                <option>30</option>
+                                                <option>32</option>
+                                                <option>34</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                               
+                                <div class="form-group">
+                                    <button type="sumbit" class='btn btn-primary'>Search Product</button>
+                                </div>
+
+                            </form>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
         </div>
         <!-- /.row (main row) -->
       </div><!-- /.container-fluid -->
@@ -113,6 +189,23 @@
 @endsection
 
 @push('js')
+ <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
+<script>
+    $(document).ready(function() {
+    $('.size').select2({
+        theme: 'bootstrap4'
+    });
+    $('.category').select2({
+        theme: 'bootstrap4',
+        placeholder: "Select a category",
+    });
+    $('.sub-category').select2({
+        theme: 'bootstrap4',
+        placeholder: "Select subcategory",
+    });
+  
+});
+</script>
 <script src="https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.js"></script>
 
  <script>
@@ -142,17 +235,16 @@
   headers: {
   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 },
-bundle: true,
-limit:2
+bundle: false,
+limit:1
 })
-  
-
-      uppy.on('upload-success', (file, response) => {
+uppy.on('upload-success', (file, response) => {
   console.log(response.status);
   console.log(response.body);
   
   
 })
     </script>
+ 
   
 @endpush

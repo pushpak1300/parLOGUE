@@ -6,10 +6,12 @@ use App\photho;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Yajra\Datatables\Datatables;
-
+use App\Traits\UploadTrait;
 
 class PhothoController extends Controller
 {
+    use UploadTrait;   
+
     /**
      * Display a listing of the resource.
      *
@@ -33,22 +35,17 @@ class PhothoController extends Controller
                 'photho' => 'required',
                 'photho.*' => 'mimes:png,jpeg,gif,jpg'
 ]);   
+// return response()->json($request->hasfile('photho'));
  if($request->hasfile('photho'))
          {
-
+            // return response()->json($photho);
             foreach($request->file('photho') as $file)
             {
-                $photho=new photho;
-                $photho->save();
-                $id=$photho->id;
-                $extension=$file->getClientOriginalExtension();
-                // $path = Storage::putFileAs('public', $file,$id);
-                $path =Storage::putFileAs('public',$file,"".$id.".".$extension);
-                $photho->path=$path;
-                $photho->save();
+               $photho=$this->uploadOne($file); 
             }
+            
          }
-return response()->json($photho);
+         return response()->json($photho);
     }
 
 
@@ -70,10 +67,10 @@ return response()->json($photho);
      */
     public function anyData()
     {
-        $photho=photho::select(['path','created_at','id']);
+        $photho=photho::all();
         return Datatables::of($photho)
             ->addColumn('thumbnail', function (photho $photho) {
-            return '<img width=60px; height=80px; src="'.$photho->path.'">';
+            return '<img class="text-center" width=60px; height=80px; src="'.$photho->path.'">';
             })
             ->addColumn('delete', function(photho $photho) {
                 return '<button id="'.$photho->id.'" class="delete fa fa-trash btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal"></button>';
@@ -81,7 +78,10 @@ return response()->json($photho);
             ->addColumn('view', function(photho $photho) {
                 return '<button id="'.$photho->path.'" class="view fa fa-search-plus btn-sm btn-success" data-toggle="modal" data-target="#viewModal"></button>';
             })
-            ->rawColumns(['delete','view', 'thumbnail'])
+            ->addColumn('add', function(photho $photho) {
+                return '<button id="'.$photho->id.'" class="add fa fa-plus btn-sm btn-success" data-toggle="modal" data-target="#addModal"></button>';
+            })
+            ->rawColumns(['delete','view', 'thumbnail','add'])
             ->make(true);
     }
 }

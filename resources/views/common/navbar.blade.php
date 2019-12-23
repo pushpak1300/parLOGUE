@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>parLOGUE</title>
+  <title>{{env('APP_NAME')}}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -28,19 +28,19 @@
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Home</a>
+        <a href="/home" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{asset('index3.html')}}" class="nav-link">Product</a>
+        <a href="/product" class="nav-link">Product</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Photo</a>
+        <a href="/photho" class="nav-link">Photo</a>
       </li>
      
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    {{-- <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
@@ -49,7 +49,7 @@
           </button>
         </div>
       </div>
-    </form>
+    </form> --}}
 
     <!-- Right navbar links -->
     
@@ -59,12 +59,12 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{asset('index3.html')}}" class="brand-link">
+    <a href="/" class="brand-link">
       <img src="{{asset('dist/img/AdminLTELogo.png')}}"
            alt="AdminLTE Logo"
            class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">parLogue</span>
+      <span class="brand-text font-weight-light">{{env('APP_NAME')}}</span>
     </a>
 
     <!-- Sidebar -->
@@ -85,7 +85,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="/home" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -100,22 +100,21 @@
               <p>
                 Products
                 <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">2</span>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="layout/top-nav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="/product" class="nav-link">
                   <p>Manage Product</p>
                 </a>
               </li>
+              
               <li class="nav-item">
-                <a href="layout/top-nav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Manage Product</p>
+                <a href="/sub-category" class="nav-link">
+                  <p>Manage Sub-Categories</p>
                 </a>
               </li>
+            
              
             </ul>
           </li>
@@ -125,26 +124,23 @@
               <p>
                 Picture
                 <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">2</span>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="layout/top-nav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="/photho" class="nav-link">
                   <p>Manage Pictures</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="layout/top-nav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="/addphotho" class="nav-link">
                   <p>Add Picture</p>
                 </a>
               </li>
              
             </ul>
             <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="/logout" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Logout
@@ -163,7 +159,7 @@
   </aside>
   @yield('content')
   <footer class="main-footer">
-    <strong>Copyright &copy; 2019 <a href="#">parLOGUE</a>.</strong>
+    <strong>Copyright &copy; 2019 <a href="#">{{env('APP_NAME')}}</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 0.0.1
@@ -179,24 +175,24 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
+<script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- daterangepicker -->
-<script src="plugins/moment/moment.min.js"></script>
-<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<script src="{{asset('plugins/moment/moment.min.js')}}"></script>
+<script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
 <!-- Tempusdominus Bootstrap 4 -->
-<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="{{asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 <!-- overlayScrollbars -->
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.js"></script>
+<script src="{{asset('dist/js/adminlte.js')}}"></script>
 @stack('js')
 </body>
 </html>

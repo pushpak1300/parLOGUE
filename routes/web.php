@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -23,3 +24,17 @@ Route::get('/home', function() {
 
 Route::resource('photho', 'PhothoController');
 Route::get('/photho-table', 'PhothoController@anyData');
+Route::resource('product', 'ProductController');
+Route::get('/product-table', 'ProductController@anyData');
+Route::get('/logout', function () {
+    Auth::logout();
+    return view('welcome');
+});
+Route::get('/search', 'ProductController@search');
+Route::resource('/sub-category', 'SubCategoryController');
+Route::get('/sub-category-table', 'SubCategoryController@anyData');
+Route::get('/addproduct', 'ProductController@addproduct');
+Route::post('/storeproduct', 'ProductController@storeproduct');
+
+Route::get('/boys','ProductCotroller@getboys');
+
