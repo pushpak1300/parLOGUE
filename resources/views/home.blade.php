@@ -1,7 +1,7 @@
 @extends('common.navbar')
 
 @push('css')
-<link href="https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.css" rel="stylesheet">
+<link href="{{asset('css/uppy.min.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="{{asset('plugins/select2/css/select2.min.css')}}">
 <link rel="stylesheet" href="{{asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
 
@@ -206,7 +206,7 @@
   
 });
 </script>
-<script src="https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.js"></script>
+<script src="{{asset('js/uppy.js')}}"></script>
 
  <script>
       var uppy = Uppy.Core({

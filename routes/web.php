@@ -14,7 +14,7 @@
 
 Route::get('/', function () {
     return view('new-welcome');
-});
+})->middleware('auth');
 
 Auth::routes();
 
@@ -40,6 +40,4 @@ Route::get('/boys','ProductController@getboys')->middleware('auth');
 Route::get('/boys/{size}','ProductController@getboysize')->middleware('auth');
 Route::get('/girls','ProductController@getgirls')->middleware('auth');
 Route::get('/girls/{size}','ProductController@getgirlsize')->middleware('auth');
-Route::get('/debug-sentry', function () {
-    throw new Exception('My first Sentry error!');
-});
+Route::get('/wishlist','ProductController@wishlist')->middleware('auth');

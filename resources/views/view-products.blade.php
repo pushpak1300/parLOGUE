@@ -22,7 +22,7 @@
 					<div class="product-item">
 						<div class="pi-pic">
                             <a href="{{asset($item->photho_path)}}" data-toggle="lightbox" data-gallery="example-gallery" data-type="image">
-                            <img src="{{asset($item->photho_path)}}" alt="">
+                            <img src="{{asset($item->photho_path)}}" alt="" height="420px" width="300px">
                              </a>
 							<div class="pi-links">
 								<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>

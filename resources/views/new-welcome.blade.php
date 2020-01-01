@@ -18,7 +18,7 @@
 					<div class="product-item">
                         <a href="/boys">
 						<div class="pi-pic">
-<img src="https://img.icons8.com/doodle/500/000000/boy.png">							
+<img src="{{asset('image/boy.png')}}">							
                         </div>
                         </a>
 						<div class="pi-text">
@@ -31,7 +31,7 @@
 					<div class="product-item">
                         <a href="/girls">
 						<div class="pi-pic">
-<img src="https://img.icons8.com/doodle/500/000000/girl.png">							
+<img src="{{asset('image/girl.png')}}">							
                         </div>
                         </a>
 						<div class="pi-text">

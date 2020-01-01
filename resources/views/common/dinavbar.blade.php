@@ -46,16 +46,24 @@
 					
 					<div class="col-xl-3 col-lg-3">
 						<div class="user-panel">
+							@auth
 							<div class="up-item">
                                 <i class="flaticon-profile"></i>
-                                <a href="#">Sign</a> In</a>
-                            </div>
+                                <a href="/">Home</a>
+							</div>
+							@else
+							<div class="up-item">
+                                <i class="flaticon-profile"></i>
+                                <a href="/login">Sign</a> In</a>
+							</div>
+							@endauth
+							
                             
                             <div class="up-item">
 								<div class="shopping-card">
 <i class="flaticon-bag"></i>
                                 </div>
-								<a href="#">Wish List</a>
+								<a href="/wishlist">Wish List</a>
 							</div>
 							
 						</div>
@@ -72,8 +80,8 @@
 		<div class="social-links-warp">
 			<div class="container">
 				<div class="social-links text-center">
-					<a href="" class="instagram"><i class="fa fa-instagram"></i><span>instagram</span></a>
-					<a href="" class="google-plus"><i class="fa fa-google-plus"></i><span>g+plus</span></a>
+					<a href="/home" class="instagram"><i class="fa fa-instagram"></i><span>instagram</span></a>
+					<a href="/home" class="google-plus"><i class="fa fa-google-plus"></i><span>g+plus</span></a>
 				</div>
 
 <p class="text-white text-center mt-5">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This app is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://pushpak1300.github.io" target="_blank">Pushpak</a></p>
