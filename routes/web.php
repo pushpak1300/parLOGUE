@@ -40,4 +40,6 @@ Route::get('/boys','ProductController@getboys')->middleware('auth');
 Route::get('/boys/{size}','ProductController@getboysize')->middleware('auth');
 Route::get('/girls','ProductController@getgirls')->middleware('auth');
 Route::get('/girls/{size}','ProductController@getgirlsize')->middleware('auth');
-
+Route::get('/debug-sentry', function () {
+    throw new Exception('My first Sentry error!');
+});
