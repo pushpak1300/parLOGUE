@@ -81,6 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
+                    <img src="https://img.icons8.com/wired/64/000000/moleskine.png"><br>
                    {{env('APP_NAME')}}
                 </div>
 

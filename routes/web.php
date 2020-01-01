@@ -13,7 +13,7 @@
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('new-welcome');
 });
 
 Auth::routes();
@@ -22,19 +22,22 @@ Route::get('/home', function() {
     return view('home');
 })->name('home')->middleware('auth');
 
-Route::resource('photho', 'PhothoController');
-Route::get('/photho-table', 'PhothoController@anyData');
-Route::resource('product', 'ProductController');
-Route::get('/product-table', 'ProductController@anyData');
+Route::resource('photho', 'PhothoController')->middleware('auth');
+Route::get('/photho-table', 'PhothoController@anyData')->middleware('auth');
+Route::resource('product', 'ProductController')->middleware('auth');
+Route::get('/product-table', 'ProductController@anyData')->middleware('auth');
 Route::get('/logout', function () {
     Auth::logout();
     return view('welcome');
-});
-Route::get('/search', 'ProductController@search');
-Route::resource('/sub-category', 'SubCategoryController');
-Route::get('/sub-category-table', 'SubCategoryController@anyData');
-Route::get('/addproduct', 'ProductController@addproduct');
-Route::post('/storeproduct', 'ProductController@storeproduct');
+})->middleware('auth');
+Route::get('/search', 'ProductController@search')->middleware('auth');
+Route::resource('/sub-category', 'SubCategoryController')->middleware('auth');
+Route::get('/sub-category-table', 'SubCategoryController@anyData')->middleware('auth');
+Route::get('/addproduct', 'ProductController@addproduct')->middleware('auth');
+Route::post('/storeproduct', 'ProductController@storeproduct')->middleware('auth');
 
-Route::get('/boys','ProductCotroller@getboys');
+Route::get('/boys','ProductController@getboys')->middleware('auth');
+Route::get('/boys/{size}','ProductController@getboysize')->middleware('auth');
+Route::get('/girls','ProductController@getgirls')->middleware('auth');
+Route::get('/girls/{size}','ProductController@getgirlsize')->middleware('auth');
 

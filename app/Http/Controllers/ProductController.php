@@ -212,6 +212,40 @@ $product = DB::table('products')
 
         return view('search',['product'=>$product]);
     }
+    public function getboys(){
+        $category="boys";
+        return view('size',['category'=>$category]);
+    }
+    public function getgirls(){
+        $category="girls";
+        return view('size',['category'=>$category]);
+    }
+    public function getboysize($size){
+        
+        $product = DB::table('products')
+            ->join('sizes', 'products.id', '=', 'sizes.product_id')
+            ->join('sub_category', 'products.sub_categories_id', '=', 'sub_category.id')
+            ->select('products.*', 'sizes.*','sub_category.sub_category')
+            ->where('category','Boy')
+            ->where('size',$size)
+            ->orderBy('created_at','desc')
+            ->get();
+        return view('view-products',['product'=>$product]);
+
+    }
+    public function getgirlsize($size){
+        
+        $product = DB::table('products')
+            ->join('sizes', 'products.id', '=', 'sizes.product_id')
+            ->join('sub_category', 'products.sub_categories_id', '=', 'sub_category.id')
+            ->select('products.*', 'sizes.*','sub_category.sub_category')
+            ->where('category','Girl')
+            ->where('size',$size)
+            ->orderBy('created_at','desc')
+            ->get();
+        return view('view-products',['product'=>$product]);
+
+    }
    
    
 }
